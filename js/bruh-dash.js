@@ -10,74 +10,142 @@ var global = window || GLOBAL;
 global.bruhdash = {
 
   // returns the first element of an array
-  first: function () {
-      
+  first: function (arr) {
+      return arr.shift();
   },
 
   // returns the last element of an array
-  last: function () {
-
+  last: function (arr) {
+      return arr.pop();
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function () {
-
+  indexOf: function (arr, x) {
+      return arr.indexOf(x);
   },
 
   // returns the index of the first matching element from right to left
-  lastIndexOf: function () {
-
+  lastIndexOf: function (arr, x) {
+      return arr.lastIndexOf(x);
   },
 
   // returns an array with all elements except for the last element
-  initial: function () {
-
+  initial: function(array) {
+    var lastElem = array.pop();
+    return array;
   },
   
   // returns an array with all falsey values removed
-  compact: function() {
+  compact: function(array) {
+    for(var i = 0; i < array.length; i++){
+      if(array[i] === false){
 
+      }
+    }
+    return array.filter(Boolean);
   },
 
   // creates a slice of an array from the start index up to but not including the end index
-  slice: function () {
-
+  slice: function (array, x, y) {
+    return array.slice(x, y);
+    
+    
   },
 
   // returns a slice of array with n elements dropped from the beignning
-  drop: function(){
+  drop: function(arr, num){
+    if(num === 0){
+      return arr;
+    }
+    if(num){
+      return arr.slice(num);
+    } else {
+      return arr.slice(1);  
+    }
 
   },
 
   // returns a slice of array with n elements dropped from the end
-  dropRight: function() {
-
+  dropRight: function(arr, num) {
+    if(num === 0){
+      return arr;
+    } else if(num){
+      return arr.slice(0, num + 1);
+    } else {
+      return arr.slice(0, arr.length - 1);
+    }
   },
 
   // creates a slice of an array with n elements taken from the beginning
-  take: function () {
-
+  take: function (arr, num) {
+    var empty = [];
+    if(num === 0){
+      return empty;
+    } else if(num){
+      return arr.slice(0, num);
+    } else if(num > arr.length){
+      return arr;
+    } else {
+      empty.push(arr[0]);
+      return empty;
+    }
   },
 
   // creates a slice of an array with n elements taken from the end
-  takeRight: function () {
-
+  takeRight: function (arr, n) {
+    var empty = [];
+    if(n > arr.length){
+      return arr;
+    } else if(n === 0){
+      return empty;
+    } else if(n){
+      return arr.slice(n - 1, arr[arr.length -1]);
+    } else{
+      empty.push(arr[arr.length - 1]);
+      return empty;
+    }
   },
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(arr, value, start, end) {
+    if(!start && !end){
+      return arr.fill(value);
+    } else{
+      for(var i = start; i < end; i++){
+        arr.splice(i, 1, value);
+      }
+    }
+    return arr;
   },
 
   // removes all given values from an array
-  pull: function () {
+  pull: function (arr, valueOne, valueTwo) {
+    var arrDash = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      // comparing the current iteration value to see if it equals valueOne (a) or valueTwo (b)
+      if (arr[i] !== valueOne && arr[i] !== valueTwo) {
+        // whatever is left over will be pushed into arrDash
+        arrDash.push(arr[i]);
+      }
+    }
+    // returning arrDash
+    return arrDash;
 
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (arr, index) {
+    var x = [];
+    for(let i = 0; i < arr.length; i++){
+      for(let y = 0; y < arr.length; i++){
+        if(arr.indexOf(arr[i]) === index[y]){
+          x.push(arr[i])
+        }
+      }
+    }
+    return x;
   },
 
   // creates an array excluding all the specified values
